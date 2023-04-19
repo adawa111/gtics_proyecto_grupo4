@@ -10,7 +10,7 @@ public class controllerPaciente {
 
     @RequestMapping(value={"","/"},method = RequestMethod.GET)
     public String vistBase(){
-        return "paciente/dashboardVistaPrincipalPaciente";
+        return "paciente/PacienteInicio";
     }
 
     @RequestMapping(value={"/altern"},method = RequestMethod.GET)

@@ -67,14 +67,14 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <form>
-                            <button type="button" class="btn btn-primary rounded-pill" style="background-color: #4200FF; color: #ffffff;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#loginModalLabel" style="background-color: #4200FF; color: #ffffff;" >
                                 Iniciar Sesión
                             </button>
                         </form>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #4200FF">Registrarse</a>
+                        <a class="nav-link" href="#" style="color: #4200FF" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrarse</a>
                     </li>
                 </ul>
             </div>
@@ -93,6 +93,39 @@
                         <!-- Columna derecha -->
                         <div class="col-md-7 text-center">
                             <h2 class="modal-title mb-4 mt-5" id="exampleModalLabel" style="color: #4E4E4E; font-weight: bold;font-family: poppins ">Hola, puedes registrate de las siguientes maneras:</h2>
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <h3 style="font-family: poppins; color: #4200FF; font-weight: bold">
+                                        Vía QR:
+                                    </h3>
+                                    <img th:src="@{Principal/qr.png}" class="img-fluid">
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <h3 style="font-family: poppins; color: #4200FF; font-weight: bold">
+                                        Vía Gmail:
+                                    </h3>
+                                    <button class="btn btn-primary btn-lg w-75 mt-5 rounded-pill shadow-lg" style="background-color: #4200FF;">Registrarse con Gmail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content" style="border-radius: 30px">
+                <div class="modal-body p-0" style="border-radius: 30px">
+                    <div class="row">
+                        <!-- Columna izquierda -->
+                        <div class="col-md-5" style="background: linear-gradient(#4200FF, #5e35e8); border-radius: 30px 0px 0px 30px;">
+                            <img th:src="@{Principal/modal1.png}" class="img-fluid mt-2 mb-2">
+                        </div>
+                        <!-- Columna derecha -->
+                        <div class="col-md-7 text-center">
+                            <h2 class="modal-title mb-4 mt-5" id="loginModalLabel" style="color: #4E4E4E; font-weight: bold;font-family: poppins ">Hola, puedes registrate de las siguientes maneras:</h2>
                             <div class="row">
                                 <div class="col-md-6 text-center">
                                     <h3 style="font-family: poppins; color: #4200FF; font-weight: bold">
@@ -303,14 +336,7 @@
     }
 
 </style>
-<script>
-    var myModal = document.getElementById('loginModal')
-    var myInput = document.getElementById('exampleInputPassword1')
 
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
-</script>
 
 
 

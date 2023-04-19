@@ -11,7 +11,7 @@ public class controllerPrincipal {
     @RequestMapping(value={"/"},method = RequestMethod.GET)
     public String vistaPrincipal(){
 
-        return "vistaPrincipal";
+        return "Inicio/vistaPrincipal";
     }
 
 }

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard Paciente</title>
+  <!-- Agregar los estilos de Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-kZJ8NYJu+1FZQaVoQiM+2yNx8z+XMpX9+E9JvLveZlSKhITRwUhDPLNXzg2BfWt/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-Vp0zFZ/NOh9tF/s5xEqH3I5J5y5ElmXTxoyPH0cczOvO2JZgj49XV8hJjGGGCB6Qb1yypIH+6c/CU6G3qZ7zUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-igBjJwYCCPpL+Mfnrki1xb9tNZFbJq3OMDl8+YY5p5y5w5aGz5I5+R/Q9z9n1eQZBwpGv0hWjDjj0g+7YFdq3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="language" content="es">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-6zpxYHvGQhxGrwESe3q3sjjABJpOz8WHA0I06gj+kX9F4OiIdPTO4UwpaRUOvo7G" crossorigin="anonymous"></script>
+
+
+  <style>
+    /* Estilos CSS personalizados */
+
+    .left-column {
+      border-radius: 30px;
+      background-color: #f5f5f5;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .right-column {
+      background-color: #e0e0e0;
+    }
+
+    footer {
+      background-color: #4200FF;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: absolute;
+      bottom: 0;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+
+    /* Estilo para crear un contenedor de flexbox que ocupe toda la altura de body */
+    .container-flex {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Estilo para hacer que el área de contenido ocupe todo el espacio restante */
+    .content {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="container-flex">
+    <div class="row flex-grow-1">
+      <div class="col-md-2 bg-white align-items-center" style="color: #4200ff; font-family: poppins;
+      position: sticky; top: 0; height: 100vh;
+      border-radius: 30px;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+        <h1 class="mt-4 align-items-center">Innovamed</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="mt-4 align-items-center">Clinic</h1>
+          </div>
+          <div class="col-md-6">
+            <img class="img-fluid d-block" th:src="@{eslogan.png}" alt="Eslogan de Innovamed">
+          </div>
+        </div>
+        <div class="container-fluid d-flex flex-column justify-content-center">
+          <nav class="nav flex-column mt-5 align-items-center stacked-menu d-flex justify-content-center">
+            <a class="nav-link active" href="#"><span class="menu-icon fas fa-home" style="color: #4200FF"></span>Dashboard</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-calendar"></span>Citas Agendadas</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-money-bill"></span>Pagos</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-question-circle"></span>Cuestionarios</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-check-square"></span>Consentimientos</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-user-md"></span>Doctores</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-sign-out-alt"></span>Cerrar Sesión</a>
+          </nav>
+        </div>
+
+      </div>
+      <div class="col-md-9 ml-3 h-100 right-column bg-white">
+        <!-- Contenido de la columna derecha -->
+        <div class="container-fluid bg-white">
+          <!-- Contenido de la columna derecha -->
+          <div class="row bg-white">
+            <div class="col-md-8">
+              <h4 class="mt-5" style="color: #4E4E4E;font-size: 25px; font-weight: bold;font-family: poppins">
+                Hola <span style="color:#4200ff">[nombre del paciente]</span>
+              </h4>
+              <h4 style="color: #4E4E4E;font-size: 25px; font-weight: bold;font-family: poppins">
+                Aquí podrás ver tus citas pasadass
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid bg-white h-100 justify-content-center text-center">
+          <!-- Contenido de la columna derecha -->
+          <div style="width:85%;border-radius: 30px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);align-self: center; mx-auto;">
+            <h4 style="color: #4E4E4E;font-size: 20px; font-weight: bold;font-family: poppins;">
+              Historial de Citas
+            </h4>
+            <div class="container">
+              <table id="table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Foto</th>
+                  <th>Especialidad</th>
+                  <th>Hora</th>
+                  <th>Fecha</th>
+                  <th>Tipo de cita</th>
+                  <th>Ver receta</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><img src="foto1.jpg" alt="Foto 1" width="50" height="50"></td>
+                  <td>Especialidad 1</td>
+                  <td>10:00 am</td>
+                  <td>01/01/2023</td>
+                  <td>Tipo 1</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><img src="foto2.jpg" alt="Foto 2" width="50" height="50"></td>
+                  <td>Especialidad 2</td>
+                  <td>11:00 am</td>
+                  <td>02/01/2023</td>
+                  <td>Tipo 2</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><img src="foto3.jpg" alt="Foto 3" width="50" height="50"></td>
+                  <td>Especialidad 3</td>
+                  <td>12:00 pm</td>
+                  <td>03/01/2023</td>
+                  <td>Tipo 3</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><img src="foto4.jpg" alt="Foto 4" width="50" height="50"></td>
+                  <td>Especialidad 4</td>
+                  <td>01:00 pm</td>
+                  <td>04/01/2023</td>
+                  <td>Tipo 4</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><img src="foto5.jpg" alt="Foto 5" width="50" height="50"></td>
+                  <td>Especialidad 5</td>
+                  <td>02:00 pm</td>
+                  <td>05/01/2023</td>
+                  <td>Tipo 5</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><img src="foto6.jpg" alt="Foto 6" width="50" height="50"></td>
+                  <td>Especialidad 6</td>
+                  <td>03:00 pm</td>
+                  <td>06/01/2023</td>
+                  <td>Tipo 6</td>
+                  <td><a href="#">Ver receta</a> </td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><img src="foto7.jpg" alt="Foto 7" width="50" height="50"></td>
+                  <td>Especialidad 7</td>
+                  <td>04:00 pm</td>
+                  <td>07/01/2023</td>
+                  <td>Tipo 7</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><img src="foto8.jpg" alt="Foto 8" width="50" height="50"></td>
+                  <td>Especialidad 8</td>
+                  <td>05:00 pm</td>
+                  <td>08/01/2023</td>
+                  <td>Tipo 8</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><img src="foto9.jpg" alt="Foto 9" width="50" height="50"></td>
+                  <td>Especialidad 9</td>
+                  <td>06:00 pm</td>
+                  <td>09/01/2023</td>
+                  <td>Tipo 9</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><img src="foto10.jpg" alt="Foto 10" width="50" height="50"></td>
+                  <td>Especialidad 10</td>
+                  <td>07:00 pm</td>
+                  <td>10/01/2023</td>
+                  <td>Tipo 10</td>
+                  <td><a href="#">Ver receta</a></td>
+                </tr>
+                </tbody>
+              </table>
+              <div id="pagination"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Agregar el footer -->
+<footer class="footer fixed-bottom" style="margin-bottom: 0">
+  Derechos Reservados &copy; 2023
+</footer>
+<!-- Agregar los scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  // Inicializar el mapa en el div con ID "mapid"
+  var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+  // Agregar un tile layer (mapa base)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+    id: 'mapbox.streets'
+  }).addTo(mymap);
+
+  // Agregar un marcador en la ubicación deseada
+  var marker = L.marker([51.5, -0.09]).addTo(mymap);
+</script>
+
+</body>
+
+</html>
