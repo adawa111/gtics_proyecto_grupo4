@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/cabecera.html::cabecera('Dashboard Paciente')}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.js"></script>
+  <style>
+    #mapa { height: 400px; }
+  </style>
+</head>
+<body>
+<!-- .app -->
+<!--[if lt IE 10]>
+<div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+<![endif]-->
+<!-- .app-header -->
+<header th:replace="~{fragmentos/topbar.html::topBar}"></header>  <!-- /.app-header -->
+<!-- .app-aside -->
+<aside th:replace="~{fragmentos/sidebar.html::sideBar}"></aside>><!-- /.app-aside -->
+<main class="app-main bg-white h-100"><!-- .ACA VATODO EL CONTENIDO DEL DASHBOARD -->
+  <div class="container-fluid bg-white h-100 ">
+    <!-- Contenido de la columna derecha -->
+    <div class="row bg-white">
+      <div class="col-md-8">
+        <h3 class="mt-5" style="color: #4E4E4E;font-size: 30px; font-weight: bold;font-family: poppins">
+
+          Recuerda responder los cuestionarios para una mejor atención
+        </h3>
+      </div>
+    </div>
+    <div class="container-fluid rounded-pill">
+      <div class="row">
+        <div class="col-md-9">
+          <h3 class="mt-5" style="color: #4E4E4E;font-size: 30px; font-weight: bold;font-family: poppins">
+            Cuestionarios
+          </h3>
+        </div>
+        <div class="col-md-2">
+          <div class="container-fluid mt-4">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+              <button class="btn btn-primary" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="container-fluid">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Asunto</th>
+              <th scope="col">Doctor remitente:</th>
+              <th scope="col">Especialidad</th>
+              <th scope="col">Hora y Fecha</th>
+              <th scope="col">Responder</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Progreso del paciente</td>
+              <td>Jean Lee Un</td>
+              <td>Traumatología</td>
+              <td>  16:15 02/10</td>
+              <td><button type="button" class="btn  btn-success rounded-pill">Ingresar</button></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Reporte diario</td>
+              <td>Clara Brook</td>
+              <td>Psiquiatría</td>
+              <td>12:00  2/20</td>
+              <td><button type="button" class="btn  btn-success rounded-pill">Ingresar</button></td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Reacción al medicamento</td>
+              <td>Shyam Khanna</td>
+              <td>Dermatología</td>
+              <td> 15:30 01/27</td>
+              <td><button type="button" class="btn  btn-success rounded-pill">Ingresar</button></td>
+            </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer th:replace="~{fragmentos/footer.html::footer}" style="text-align: center"></footer>
+</main>
+<!-- .app-main -->
+</div><!-- /.app -->
+
+<div th:replace="~{fragmentos/scripts.html::scripts}"></div>
+</body>
+</html>

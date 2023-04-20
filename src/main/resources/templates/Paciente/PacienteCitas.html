@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard Paciente</title>
+  <!-- Agregar los estilos de Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-kZJ8NYJu+1FZQaVoQiM+2yNx8z+XMpX9+E9JvLveZlSKhITRwUhDPLNXzg2BfWt/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-Vp0zFZ/NOh9tF/s5xEqH3I5J5y5ElmXTxoyPH0cczOvO2JZgj49XV8hJjGGGCB6Qb1yypIH+6c/CU6G3qZ7zUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-igBjJwYCCPpL+Mfnrki1xb9tNZFbJq3OMDl8+YY5p5y5w5aGz5I5+R/Q9z9n1eQZBwpGv0hWjDjj0g+7YFdq3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="language" content="es">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-6zpxYHvGQhxGrwESe3q3sjjABJpOz8WHA0I06gj+kX9F4OiIdPTO4UwpaRUOvo7G" crossorigin="anonymous"></script>
+
+
+  <style>
+    /* Estilos CSS personalizados */
+
+    .left-column {
+      border-radius: 30px;
+      background-color: #f5f5f5;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .right-column {
+      background-color: #e0e0e0;
+    }
+
+    footer {
+      background-color: #4200FF;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: absolute;
+      bottom: 0;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+
+    /* Estilo para crear un contenedor de flexbox que ocupe toda la altura de body */
+    .container-flex {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Estilo para hacer que el área de contenido ocupe todo el espacio restante */
+    .content {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="container-flex">
+    <div class="row flex-grow-1">
+      <div class="col-md-2 bg-white align-items-center" style="color: #4200ff; font-family: poppins;
+      position: sticky; top: 0; height: 100vh;
+      border-radius: 30px;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+        <h1 class="mt-4 align-items-center">Innovamed</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="mt-4 align-items-center">Clinic</h1>
+          </div>
+          <div class="col-md-6">
+            <img class="img-fluid d-block" th:src="@{eslogan.png}" alt="Eslogan de Innovamed">
+          </div>
+        </div>
+        <div class="container-fluid d-flex flex-column justify-content-center">
+          <nav class="nav flex-column mt-5 align-items-center stacked-menu d-flex justify-content-center">
+            <a class="nav-link active" href="#"><span class="menu-icon fas fa-home" style="color: #4200FF"></span>Dashboard</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-calendar"></span>Citas Agendadas</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-money-bill"></span>Pagos</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-question-circle"></span>Cuestionarios</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-check-square"></span>Consentimientos</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-user-md"></span>Doctores</a>
+            <a class="nav-link" href="#"><span class="menu-icon fas fa-sign-out-alt"></span>Cerrar Sesión</a>
+          </nav>
+        </div>
+
+      </div>
+      <div class="container-fluid bg-white h-100 ">
+        <!-- Contenido de la columna derecha -->
+        <div class="row bg-white">
+          <div class="col-md-8">
+            <h3 class="mt-5" style="color: #4E4E4E;font-size: 30px; font-weight: bold;font-family: poppins">
+              Bienvenido(a), paciente
+            </h3>
+          </div>
+        </div>
+        <div class="container-fluid rounded-pill">
+          <div class="row">
+            <div class="col-md-9">
+              <h3 class="mt-5" style="color: #4E4E4E;font-size: 30px; font-weight: bold;font-family: poppins">
+                Próximas Citas
+              </h3>
+            </div>
+            <div class="col-md-2">
+              <div class="container-fluid mt-4">
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                  <button class="btn btn-primary" type="submit">Buscar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              Lista Usuarios
+
+
+              <select id="number_1" name="tipo_user" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <option value="0">Tipo Usuario</option>
+                <option value="0">Paciente</option>
+                <option value="1">Doctor</option>
+                <option value="2">Administrador</option>
+                <option value="100">Administrativo</option>
+              </select>
+
+              <select id="number_2" name="tipo_user" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <option value="0">Status</option>
+                <option value="0">Activo</option>
+                <option value="1">Inactivo</option>
+                <option value="2">Registrado</option>
+              </select>
+              <div class="container-fluid">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Doctor</th>
+                  <th scope="col">Especialidad</th>
+                  <th scope="col">Hora y Fecha</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Shyam Khanna</td>
+                  <td>Dermatología</td>
+                  <td> 15:30 27/01/2023</td>
+                  <td><button type="button" class="btn btn-primary">Acceder</button></td>
+                  <td><button type="button" class="btn btn-danger">Cancelar</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jean Lee Un</td>
+                  <td>Traumatología</td>
+                  <td>16:15 10/02/2023</td>
+                  <td><button type="button" class="btn btn-primary">Acceder</button></td>
+                  <td><button type="button" class="btn btn-danger">Cancelar</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Clara Brook</td>
+                  <td>Psiquiatría</td>
+                  <td>12:00  20/02/23</td>
+                  <td><button type="button" class="btn btn-primary">Acceder</button></td>
+                  <td><button type="button" class="btn btn-danger">Cancelar</button></td>
+                </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Agregar el footer -->
+<footer class="footer fixed-bottom" style="margin-bottom: 0">
+  Derechos Reservados &copy; 2023
+</footer>
+<!-- Agregar los scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  // Inicializar el mapa en el div con ID "mapid"
+  var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+  // Agregar un tile layer (mapa base)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+    id: 'mapbox.streets'
+  }).addTo(mymap);
+
+  // Agregar un marcador en la ubicación deseada
+  var marker = L.marker([51.5, -0.09]).addTo(mymap);
+</script>
+
+</body>
+
+</html>
+
+
